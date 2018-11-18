@@ -1,0 +1,20 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+
+
+/Core/Twitter/packages
+/Core/Twitter/Twitter.Data.Contracts/bin
+/Core/Twitter/Twitter.Data.Contracts/obj
+/Core/Twitter/Twitter.Api/bin
+/Core/Twitter/Twitter.Api/obj
+/Core/Twitter/Twitter.Data.Repositories/bin
+/Core/Twitter/Twitter.Data.Repositories/obj
+/Core/Twitter/Twitter.Domain.Contracts/bin
+/Core/Twitter/Twitter.Domain.Contracts/obj
+/Core/Twitter/Twitter.Domain.Services/bin
+/Core/Twitter/Twitter.Domain.Services/obj
+/Mvc/TrialTwitter/packages
+/Mvc/TrialTwitter/TrialTwitter.Web/bin
+/Mvc/TrialTwitter/TrialTwitter.Web/obj
