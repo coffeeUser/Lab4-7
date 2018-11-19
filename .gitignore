@@ -4,18 +4,20 @@
 
 
 
-/Core/Twitter/packages
-/Core/Twitter/Twitter.Data.Contracts/bin
-/Core/Twitter/Twitter.Data.Contracts/obj
-/Core/Twitter/Twitter.Api/bin
-/Core/Twitter/Twitter.Api/obj
-/Core/Twitter/Twitter.Data.Repositories/bin
-/Core/Twitter/Twitter.Data.Repositories/obj
-/Core/Twitter/Twitter.Domain.Contracts/bin
-/Core/Twitter/Twitter.Domain.Contracts/obj
-/Core/Twitter/Twitter.Domain.Services/bin
-/Core/Twitter/Twitter.Domain.Services/obj
-/Mvc/TrialTwitter/packages
-/Mvc/TrialTwitter/TrialTwitter.Web/bin
-/Mvc/TrialTwitter/TrialTwitter.Web/obj
-/Core/Twitter/.vs
+/Core.Api.3layer/Twitter/packages
+/Core.Api.3layer/Twitter/Twitter.Data.Contracts/bin
+/Core.Api.3layer/Twitter/Twitter.Data.Contracts/obj
+/Core.Api.3layer/Twitter/Twitter.Api/bin
+/Core.Api.3layer/Twitter/Twitter.Api/obj
+/Core.Api.3layer/Twitter/Twitter.Data.Repositories/bin
+/Core.Api.3layer/Twitter/Twitter.Data.Repositories/obj
+/Core.Api.3layer/Twitter/Twitter.Domain.Contracts/bin
+/Core.Api.3layer/Twitter/Twitter.Domain.Contracts/obj
+/Core.Api.3layer/Twitter/Twitter.Domain.Services/bin
+/Core.Api.3layer/Twitter/Twitter.Domain.Services/obj
+/Mvc.Monolit/TrialTwitter/packages
+/Mvc.Monolit/TrialTwitter/TrialTwitter.Web/bin
+/Mvc.Monolit/TrialTwitter/TrialTwitter.Web/obj
+/Core.Api.3layer/Twitter/.vs
+/Core.Api.Monolit/Twitter/Twitter.Api/bin
+/Core.Api.Monolit/Twitter/Twitter.Api/obj
