@@ -23,3 +23,5 @@
 /Core.Api.Monolit/Twitter/Twitter.Api/bin
 /Core.Api.Monolit/Twitter/Twitter.Api/obj
 /Core.Api.Monolit/Twitter/.vs
+/Core.Api.Monolit/Twitter/Twitter.Client/bin
+/Core.Api.Monolit/Twitter/Twitter.Client/obj

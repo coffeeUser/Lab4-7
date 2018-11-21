@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -10,6 +12,7 @@ using Twitter.Api.Models.Context;
 
 namespace Twitter.Api.Controllers
 {
+    [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
     public class TweetController : ControllerBase
@@ -27,24 +30,27 @@ namespace Twitter.Api.Controllers
 
         // GET api/tweets
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<IEnumerable<Tweet>> Get()
         {
-            return new string[] { "value1", "value2" };
+            return context.Tweets;
         }
 
         // GET api/tweets/5
         [HttpGet("{id}")]
-        public ActionResult<string> Get(int id)
+        public Tweet Get(int id)
         {
-            return "value";
+            return context.Tweets.FirstOrDefault(x => x.Id == id);
         }
 
         // POST api/tweets
         [HttpPost]
-        public void Post(Tweet model)
+        public async Task PostAsync(Tweet model)
         {
-            model.AuthorId = userManager.Users.Where(x => x.UserName == signInManager.Context.User.Identity.Name).FirstOrDefault().Id; //TODO some shit!
-            model.Author = userManager.Users.Where(x => x.UserName == signInManager.Context.User.Identity.Name).FirstOrDefault();
+            var isLogged = User.Identity.IsAuthenticated;
+            User user = await userManager.GetUserAsync(HttpContext.User);
+
+            model.AuthorId = context.Users.FirstOrDefault(x => x.Email == user.Email).Id; //TODO some shit!
+            model.Author = context.Users.FirstOrDefault(x => x.Email == user.Email);
             model.Date = DateTime.Now;
             context.Tweets.Add(model);
         }
