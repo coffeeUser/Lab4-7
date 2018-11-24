@@ -62,6 +62,7 @@ namespace Twitter.Api
                     };
                 });
 
+            services.AddCors();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -77,6 +78,12 @@ namespace Twitter.Api
                 app.UseHsts();
             }
 
+            app.UseCors(b =>
+            {
+                b.AllowAnyOrigin();
+                b.AllowAnyMethod();
+                b.AllowAnyHeader();
+            });
             app.UseAuthentication();
             app.UseMvc();
         }

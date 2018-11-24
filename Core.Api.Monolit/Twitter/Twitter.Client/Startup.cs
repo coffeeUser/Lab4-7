@@ -31,7 +31,7 @@ namespace Twitter.Client
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
+            services.AddCors();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -51,6 +51,12 @@ namespace Twitter.Client
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
+            app.UseCors(b =>
+            {
+                b.AllowAnyOrigin();
+                b.AllowAnyMethod();
+                b.AllowAnyHeader();
+            });
 
             app.UseMvc();
         }

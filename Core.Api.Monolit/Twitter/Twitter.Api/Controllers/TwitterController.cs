@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -15,53 +16,55 @@ namespace Twitter.Api.Controllers
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
-    public class TweetController : ControllerBase
+    public class TwitterController : ControllerBase
     {
         private readonly ApplicationContext context;
         private readonly UserManager<User> userManager;
         private readonly SignInManager<User> signInManager;
 
-        public TweetController(UserManager<User> userManager, SignInManager<User> signInManager, ApplicationContext context)
+        public TwitterController(UserManager<User> userManager, SignInManager<User> signInManager, ApplicationContext context)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.context = context;
         }
 
-        // GET api/tweets
+        // GET api/twitter
         [HttpGet]
         public ActionResult<IEnumerable<Tweet>> Get()
         {
             return context.Tweets;
         }
 
-        // GET api/tweets/5
+        // GET api/twitter/5
         [HttpGet("{id}")]
         public Tweet Get(int id)
         {
             return context.Tweets.FirstOrDefault(x => x.Id == id);
         }
 
-        // POST api/tweets
+        // POST api/twitter
+        [Authorize]
         [HttpPost]
-        public async Task PostAsync(Tweet model)
+        public async Task PostAsync()
         {
-            var isLogged = User.Identity.IsAuthenticated;
-            User user = await userManager.GetUserAsync(HttpContext.User);
+            var identity = signInManager.Context.User;
+            Tweet tweet = new Tweet();
+            tweet.Content = Request.Form["content"];
 
-            model.AuthorId = context.Users.FirstOrDefault(x => x.Email == user.Email).Id; //TODO some shit!
-            model.Author = context.Users.FirstOrDefault(x => x.Email == user.Email);
-            model.Date = DateTime.Now;
-            context.Tweets.Add(model);
+            //tweet.AuthorId = userManager.Users.FirstOrDefault(x => x.Email == identity).;  //TODO some shit!
+            //tweet.Author = userManager.Users.FirstOrDefault(x => x.Email == identity.Name);
+            tweet.Date = DateTime.Now;
+            context.Tweets.Add(tweet);
         }
 
-        // PUT api/tweets/5
+        // PUT api/twitter/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/tweets/5
+        // DELETE api/twitter/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
