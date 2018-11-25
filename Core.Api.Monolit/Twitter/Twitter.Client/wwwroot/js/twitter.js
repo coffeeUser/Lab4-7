@@ -17,3 +17,25 @@
         }
     });
 });
+
+$(document).ready(function () {
+    $.ajax({
+        type: 'GET',
+        url: 'http://localhost:59125/api/twitter',
+
+        success: function (tweets) {
+            var container = $("#tweets");
+            tweets.forEach(function (item) {
+                container.append(
+                    '<a href="#" class="mt-2 list-group-item list-group-item-action flex-column align-items-start">' +
+                    '<div class="d-flex w-100 justify-content-between">' +
+                    '<h5 class="mb-1">' + item.authorName + '</h5>' +
+                    '<small class="text-muted">' + item.date + '</small></div>' +
+                    '<p class="mb-1">' + item.content + '</p></a>');
+            });
+        },
+        fail: function (data) {
+            console.log(data);
+        }
+    });
+});

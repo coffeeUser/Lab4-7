@@ -33,7 +33,7 @@ namespace Twitter.Api.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Tweet>> Get()
         {
-            return context.Tweets;
+            return context.Tweets.ToList();
         }
 
         // GET api/twitter/5
@@ -46,16 +46,18 @@ namespace Twitter.Api.Controllers
         // POST api/twitter
         [Authorize]
         [HttpPost]
-        public async Task PostAsync()
+        public void Post()
         {
-            var identity = signInManager.Context.User;
+            var email = User.Claims.FirstOrDefault(x => x.Type == "sub").Value;
             Tweet tweet = new Tweet();
             tweet.Content = Request.Form["content"];
 
-            //tweet.AuthorId = userManager.Users.FirstOrDefault(x => x.Email == identity).;  //TODO some shit!
-            //tweet.Author = userManager.Users.FirstOrDefault(x => x.Email == identity.Name);
+            tweet.AuthorId = userManager.Users.FirstOrDefault(x => x.Email == email).Id;  
+            tweet.Author = userManager.Users.FirstOrDefault(x => x.Email == email);
+            tweet.AuthorName = userManager.Users.FirstOrDefault(x => x.Email == email).UserName;
             tweet.Date = DateTime.Now;
             context.Tweets.Add(tweet);
+            context.SaveChanges();
         }
 
         // PUT api/twitter/5
