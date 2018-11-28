@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Newtonsoft.Json;
+using Twitter.Api.Infrastructure;
 using Twitter.Api.Models;
 
 namespace Twitter.Api.Controllers
@@ -80,26 +81,63 @@ namespace Twitter.Api.Controllers
             if (result.Succeeded)
             {
                 var appUser = userManager.Users.SingleOrDefault(x => x.Email == email);
-                await signInManager.SignInAsync(appUser, false);
-                var response = new
-                {
-                    accessToken = GenerateJwtToken(email, appUser),
-                    userName = appUser.UserName
-                };
+                //await signInManager.SignInAsync(appUser, false);
+                //var response = new
+                //{
+                //    accessToken = GenerateJwtToken(email, appUser),
+                //    userName = appUser.UserName
+                //};
                 Response.StatusCode = 200;
-                Response.ContentType = "application/json";
-                await Response.WriteAsync(JsonConvert.SerializeObject(response, new JsonSerializerSettings { Formatting = Formatting.Indented }));
+                //Response.ContentType = "application/json";
+                //await Response.WriteAsync(
+                    //JsonConvert.SerializeObject(response, new JsonSerializerSettings { Formatting = Formatting.Indented })
+                    //);
+
+                var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
+                var callbackUrl = Url.Link(
+                    "default",
+                    new { Controller = "api", Action = "confirm", userId = user.Id, code = code });
+                EmailService emailService = new EmailService();
+                await emailService.SendEmailAsync(user.Email, "Confirm your account",
+                    $"Confirm the registration by clicking on the link: <a href='{callbackUrl}'>link</a>");
                 return;
             }
             Response.StatusCode = 400;
             await Response.WriteAsync("Something went wrong.");
+            return;
         }
 
-        // GET api/login
-        [HttpGet]
-        public IQueryable<User> Get()
+        // GET api/confirm
+        [HttpGet("/api/confirm")]
+        public async Task Confirm(string userId, string code)
         {
-            return userManager.Users;
+            if (userId == null || code == null)
+            {
+                Response.StatusCode = 400;
+                await Response.WriteAsync("Something went wrong.");
+                return;
+            }
+            var user = await userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                Response.StatusCode = 400;
+                await Response.WriteAsync("This user is missing.");
+                return;
+            }
+            var result = await userManager.ConfirmEmailAsync(user, code);
+
+            if (result.Succeeded)
+            {
+                Response.StatusCode = 200;
+                await Response.WriteAsync("Email confirmed.");
+                return;
+            }
+            else
+            {
+                Response.StatusCode = 400;
+                await Response.WriteAsync("Failed to confirm email.");
+                return;
+            }
         }
 
         private object GenerateJwtToken(string email, User user)

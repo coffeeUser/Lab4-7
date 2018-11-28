@@ -85,7 +85,10 @@ namespace Twitter.Api
                 b.AllowAnyHeader();
             });
             app.UseAuthentication();
-            app.UseMvc();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute("default", "{controller}/{action}/{id?}");
+            });
         }
     }
 }

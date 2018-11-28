@@ -16,5 +16,6 @@
         window.location.href = "http://localhost:49720/twitter.html";
     }).fail(function (data) {
         console.log(data);
+        window.location.href = "http://localhost:49720/twitter.html";
     });
 });
