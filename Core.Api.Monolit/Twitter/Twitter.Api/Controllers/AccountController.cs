@@ -80,7 +80,7 @@ namespace Twitter.Api.Controllers
 
             if (result.Succeeded)
             {
-                var appUser = userManager.Users.SingleOrDefault(x => x.Email == email);
+                //var appUser = userManager.Users.SingleOrDefault(x => x.Email == email);
                 //await signInManager.SignInAsync(appUser, false);
                 //var response = new
                 //{

@@ -11,6 +11,7 @@
         data: loginData
     }).success(function (data) {
         sessionStorage.setItem("accessToken", data.accessToken);
+        sessionStorage.setItem("userName", data.userName);
         console.log(data.accessToken);
         window.location.href = "http://localhost:49720/twitter.html";
     }).fail(function (data) {

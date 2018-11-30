@@ -13,6 +13,7 @@ using Twitter.Api.Models.Context;
 
 namespace Twitter.Api.Controllers
 {
+    [Authorize]
     [Produces("application/json")]
     [Route("api/[controller]")]
     [ApiController]
@@ -20,12 +21,10 @@ namespace Twitter.Api.Controllers
     {
         private readonly ApplicationContext context;
         private readonly UserManager<User> userManager;
-        private readonly SignInManager<User> signInManager;
 
-        public TwitterController(UserManager<User> userManager, SignInManager<User> signInManager, ApplicationContext context)
+        public TwitterController(UserManager<User> userManager, ApplicationContext context)
         {
             this.userManager = userManager;
-            this.signInManager = signInManager;
             this.context = context;
         }
 
@@ -33,7 +32,9 @@ namespace Twitter.Api.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Tweet>> Get()
         {
-            return context.Tweets.ToList();
+            var aut = User.Identity.IsAuthenticated;
+            int id = context.Tweets.Max(x => x.Id);
+            return context.Tweets.Where(x => x.Id >= (id - 20)).OrderByDescending(x => x.Date).ToList();
         }
 
         // GET api/twitter/5
@@ -44,15 +45,13 @@ namespace Twitter.Api.Controllers
         }
 
         // POST api/twitter
-        [Authorize]
         [HttpPost]
         public void Post()
         {
             var email = User.Claims.FirstOrDefault(x => x.Type == "sub").Value;
             Tweet tweet = new Tweet();
             tweet.Content = Request.Form["content"];
-
-            tweet.AuthorId = userManager.Users.FirstOrDefault(x => x.Email == email).Id;  
+            tweet.AuthorId = userManager.Users.FirstOrDefault(x => x.Email == email).Id;
             tweet.Author = userManager.Users.FirstOrDefault(x => x.Email == email);
             tweet.AuthorName = userManager.Users.FirstOrDefault(x => x.Email == email).UserName;
             tweet.Date = DateTime.Now;
