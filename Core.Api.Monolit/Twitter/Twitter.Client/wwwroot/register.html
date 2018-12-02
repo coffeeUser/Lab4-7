@@ -13,7 +13,7 @@
             <div class="col-sm">
             </div>
             <div class="col-sm">
-                <form>
+                <form id="registerForm">
                     <div class="form-group">
                         <label for="Email">Email address</label>
                         <input type="email" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="Enter email">
@@ -30,6 +30,16 @@
                     <button type="submit" class="btn btn-primary" id="submitRegister">Register</button>
                     <a href="http://localhost:49720/login.html" class="alert-link">Log in</a>
                 </form>
+                <div class="alert alert-success mt-5" style="display:none;" id="success">
+                    <div>
+                        Registration confirmation sent to your email address!
+                    </div>
+                </div>
+                <div class="alert alert-danger mt-5" style="display:none;" id="danger">
+                    <div>
+                        There are some problems!
+                    </div>
+                </div>
             </div>
             <div class="col-sm">
             </div>

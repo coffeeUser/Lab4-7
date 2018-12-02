@@ -13,9 +13,10 @@
     }).success(function (data) {
         sessionStorage.setItem("accessToken", data.accessToken);
         console.log(data.accessToken);
-        window.location.href = "http://localhost:49720/twitter.html";
+        $('#registerForm').css('display', 'none');
+        $('#success').css('display', 'block');
     }).fail(function (data) {
         console.log(data);
-        window.location.href = "http://localhost:49720/twitter.html";
+        $('#danger').css('display', 'block');
     });
 });

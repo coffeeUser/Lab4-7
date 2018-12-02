@@ -32,9 +32,7 @@ namespace Twitter.Api.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<Tweet>> Get()
         {
-            var aut = User.Identity.IsAuthenticated;
-            int id = context.Tweets.Max(x => x.Id);
-            return context.Tweets.Where(x => x.Id >= (id - 20)).OrderByDescending(x => x.Date).ToList();
+            return context.Tweets.OrderByDescending(x => x.Date).ToList();
         }
 
         // GET api/twitter/5

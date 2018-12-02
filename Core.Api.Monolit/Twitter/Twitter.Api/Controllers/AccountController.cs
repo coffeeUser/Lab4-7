@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -80,19 +81,7 @@ namespace Twitter.Api.Controllers
 
             if (result.Succeeded)
             {
-                //var appUser = userManager.Users.SingleOrDefault(x => x.Email == email);
-                //await signInManager.SignInAsync(appUser, false);
-                //var response = new
-                //{
-                //    accessToken = GenerateJwtToken(email, appUser),
-                //    userName = appUser.UserName
-                //};
                 Response.StatusCode = 200;
-                //Response.ContentType = "application/json";
-                //await Response.WriteAsync(
-                    //JsonConvert.SerializeObject(response, new JsonSerializerSettings { Formatting = Formatting.Indented })
-                    //);
-
                 var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
                 var callbackUrl = Url.Link(
                     "default",
