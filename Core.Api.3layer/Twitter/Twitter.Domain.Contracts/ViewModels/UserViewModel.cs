@@ -12,6 +12,6 @@ namespace Twitter.Domain.Contracts.ViewModels
         public string Login { get; set; }
         public string Email { get; set; }
         public bool EmailConfirmed { get; set; }
-        public IEnumerable<Tweet> Tweets { get; set; }
+        public IEnumerable<TweetViewModel> Tweets { get; set; }
     }
 }

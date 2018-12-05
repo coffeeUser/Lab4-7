@@ -12,6 +12,6 @@ namespace Twitter.Domain.Contracts.ViewModels
         public string Content { get; set; }
         public DateTime date { get; set; }
         public int AuthorId { get; set; }
-        public User Author { get; set; }
+        public UserViewModel Author { get; set; }
     }
 }
