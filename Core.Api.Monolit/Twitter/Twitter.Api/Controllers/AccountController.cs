@@ -83,9 +83,10 @@ namespace Twitter.Api.Controllers
             {
                 Response.StatusCode = 200;
                 var code = await userManager.GenerateEmailConfirmationTokenAsync(user);
-                var callbackUrl = Url.Link(
-                    "default",
-                    new { Controller = "api", Action = "confirm", userId = user.Id, code = code });
+                //var callbackUrl = Url.Link(
+                //    "default",
+                //    new { Controller = "api", Action = "confirm", userId = user.Id, code = code });
+                var callbackUrl = "http://localhost:49720/confirm.html?userId=" + user.Id + "&code=" + code;     //TODO: hardcode!         
                 EmailService emailService = new EmailService();
                 await emailService.SendEmailAsync(user.Email, "Confirm your account",
                     $"Confirm the registration by clicking on the link: <a href='{callbackUrl}'>link</a>");
@@ -100,7 +101,8 @@ namespace Twitter.Api.Controllers
         [HttpGet("/api/confirm")]
         public async Task Confirm(string userId, string code)
         {
-            if (userId == null || code == null)
+            string correctCode = code.Replace(' ', '+');
+            if (userId == null || correctCode == null)
             {
                 Response.StatusCode = 400;
                 await Response.WriteAsync("Something went wrong.");
@@ -113,7 +115,7 @@ namespace Twitter.Api.Controllers
                 await Response.WriteAsync("This user is missing.");
                 return;
             }
-            var result = await userManager.ConfirmEmailAsync(user, code);
+            var result = await userManager.ConfirmEmailAsync(user, correctCode);
 
             if (result.Succeeded)
             {
