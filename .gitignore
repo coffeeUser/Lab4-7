@@ -28,6 +28,7 @@
 /Core.Api.3layer/Twitter/Twitter.Client/bin
 /Core.Api.3layer/Twitter/Twitter.Client/obj
 /.vs
+/Core.3layer/Switter/.vs
 /Core.3layer/Switter/packages
 /Core.3layer/Switter/Switter.Data.Contracts/bin
 /Core.3layer/Switter/Switter.Data.Contracts/obj
