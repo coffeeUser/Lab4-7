@@ -27,3 +27,17 @@
 /Core.Api.Monolit/Twitter/Twitter.Client/obj
 /Core.Api.3layer/Twitter/Twitter.Client/bin
 /Core.Api.3layer/Twitter/Twitter.Client/obj
+/.vs
+/Core.3layer/Switter/packages
+/Core.3layer/Switter/Switter.Data.Contracts/bin
+/Core.3layer/Switter/Switter.Data.Contracts/obj
+/Core.3layer/Switter/Switter.Data.Repositories/bin
+/Core.3layer/Switter/Switter.Data.Repositories/obj
+/Core.3layer/Switter/Switter.Domain.Contracts/bin
+/Core.3layer/Switter/Switter.Domain.Contracts/obj
+/Core.3layer/Switter/Switter.Domain.Services/bin
+/Core.3layer/Switter/Switter.Domain.Services/obj
+/Core.3layer/Switter/Switter.Infrastructure/bin
+/Core.3layer/Switter/Switter.Infrastructure/obj
+/Core.3layer/Switter/Switter.Web/bin
+/Core.3layer/Switter/Switter.Web/obj
