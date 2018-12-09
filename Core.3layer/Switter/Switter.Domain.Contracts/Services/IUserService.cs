@@ -12,7 +12,7 @@ namespace Switter.Domain.Contracts.Services
     {
         Task<bool> CreateAsync(UserViewModel user);
         Task<bool> SignInUserAsync(UserViewModel user);
-        Task<bool> UpdateAsync(UserViewModel user);
+        Task<UserViewModel> FindByNameAsync(string name);
         Task<string> GetUserTokenAsync(UserViewModel user);
         Task<UserViewModel> GetByEmailAsync(string email);
         Task<string> GetUserIdAsync(UserViewModel user);

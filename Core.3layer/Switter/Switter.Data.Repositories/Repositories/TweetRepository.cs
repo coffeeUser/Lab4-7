@@ -1,4 +1,5 @@
-﻿using Switter.Data.Contracts.Entities;
+﻿using Microsoft.EntityFrameworkCore;
+using Switter.Data.Contracts.Entities;
 using Switter.Data.Contracts.Repositories;
 using Switter.Data.Repositories.Context;
 using System;
@@ -20,14 +21,13 @@ namespace Switter.Data.Repositories.Repositories
 
         public void Create(Tweet item)
         {
-            item.Date = DateTime.Now;
             context.Tweets.Add(item);
             context.SaveChanges();
         }
 
         public IEnumerable<Tweet> GetAll()
         {
-            return context.Tweets.OrderByDescending(x => x.Date).Take(20);
+            return context.Tweets.Include("Author").OrderByDescending(x => x.Date).Take(20);
         }
     }
 }

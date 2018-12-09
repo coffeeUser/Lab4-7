@@ -68,11 +68,11 @@ namespace Switter.Domain.Services.Services
             return result.Succeeded ? true : false;
         }
 
-        public async Task<bool> UpdateAsync(UserViewModel user)
+        public async Task<UserViewModel> FindByNameAsync(string name)
         {
-            User userEntity = mapper.Map<User>(user);
-            IdentityResult result = await userRepository.UpdateAsync(userEntity);
-            return result.Succeeded ? true : false;
+            User userEntity = await userRepository.FindByNameAsync(name);
+            UserViewModel user = mapper.Map<UserViewModel>(userEntity);
+            return user;
         }
     }
 }

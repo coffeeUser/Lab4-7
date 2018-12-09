@@ -12,7 +12,7 @@ namespace Switter.Data.Contracts.Repositories
     {
         Task<IdentityResult> CreateAsync(User user, string password);
         Task<SignInResult> SignInUserAsync(User user, string password);
-        Task<IdentityResult> UpdateAsync(User user);
+        Task<User> FindByNameAsync(string name);
         Task<string> GetUserTokenAsync(User user);
         Task<User> GetByEmailAsync(string email);
         Task<string> GetUserIdAsync(User user);

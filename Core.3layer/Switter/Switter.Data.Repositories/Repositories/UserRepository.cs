@@ -68,10 +68,11 @@ namespace Switter.Data.Repositories.Repositories
             return result;
         }
 
-        public async Task<IdentityResult> UpdateAsync(User user)
+        public async Task<User> FindByNameAsync(string name)
         {
-            IdentityResult result = await userManager.UpdateAsync(user);
+            User result = await userManager.FindByNameAsync(name);
             return result;
         }
+
     }
 }
