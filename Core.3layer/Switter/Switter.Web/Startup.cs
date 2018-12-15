@@ -19,6 +19,7 @@ using Switter.Data.Contracts.Repositories;
 using Switter.Data.Repositories.Repositories;
 using Switter.Domain.Services.Services;
 using Switter.Domain.Contracts.Services;
+using Switter.Web.Crocodile.Hubs;
 
 namespace Switter.Web
 {
@@ -62,6 +63,8 @@ namespace Switter.Web
             services.AddTransient<ITweetService, TweetService>();
             services.AddTransient<IEmailService, EmailService>();
 
+            services.AddSignalR();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -84,6 +87,11 @@ namespace Switter.Web
             app.UseCookiePolicy();
 
             app.UseAuthentication();
+
+            app.UseSignalR(routes =>
+            {
+                routes.MapHub<ChatHub>("/Hub");
+            });
 
             app.UseMvc(routes =>
             {
