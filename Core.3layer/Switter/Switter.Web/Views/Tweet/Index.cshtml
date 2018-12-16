@@ -14,7 +14,7 @@
         <div class="col-sm-8">
             @foreach (var item in Model)
             {
-            <div class="mt-2 list-group well-sm" id="tweets">
+            <div id="tweets" style="margin-top: 10px; margin-bottom: 10px;">
                 <a href="" class="mt-2 list-group-item list-group-item-action flex-column align-items-start">
                     <div class="d-flex w-100 justify-content-between">
                         <h5 class="mb-1">@Html.DisplayFor(modelItem => item.Author.UserName)</h5>

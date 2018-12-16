@@ -9,5 +9,7 @@ namespace Switter.Web.Crocodile.Models
     {
         public string ConnectionId { get; set; }
         public string Name { get; set; }
+        public bool Master { get; set; }
+        public string Word { get; set; }
     }
 }
