@@ -14,6 +14,7 @@ namespace Switter.Web.Crocodile.Models
         public static void StartGame(List<Player> players)
         {
             Random random = new Random();
+
             Player masterPlayer = players[random.Next(players.Count)];
             masterPlayer.Master = true;
             masterPlayer.Word = WordGenerator.GetWord();
@@ -27,6 +28,7 @@ namespace Switter.Web.Crocodile.Models
             masterPlayer.Master = false;
             masterPlayer.Word = null;
             Word = null;
+            Master = null;
         }
     }
 }

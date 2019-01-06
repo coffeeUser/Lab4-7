@@ -30,7 +30,9 @@ hubConnection.on('UpdatePlayers', function (players) {
         document.getElementById("players").insertBefore(elem, firstElem);
 
         if (players[i].master & players[i].name == document.getElementById("userName").innerText) {
-            document.getElementById("word").innerHTML = "<p><h3>" + players[i].word + "</h3><p>"
+            document.getElementById("word").innerHTML = "<p><h3>" + players[i].word + "</h3><p>";
+            $("#inputForm").css('display', 'none');
+            $("#crocoCanvas").css('pointer-events', 'auto');
         }
     }
 });
